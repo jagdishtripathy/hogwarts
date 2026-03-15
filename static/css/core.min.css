@@ -1,0 +1,57 @@
+/* Hogwarts Theme - Core Styles */
+.jumbotron {
+    color: #d4cbb8;
+    background-color: transparent;
+}
+
+.form-control {
+    position: relative;
+    display: block;
+    padding: 0.8em !important;
+    border-radius: 2px;
+    background: transparent;
+    color: #d4cbb8;
+    font-weight: 400;
+    font-family: 'Crimson Text', Georgia, serif;
+    -webkit-appearance: none;
+    appearance: none;
+    height: auto !important;
+    border-color: rgba(200, 168, 74, 0.35);
+    border-style: solid;
+}
+
+select.form-control {
+    height: auto !important;
+}
+
+.custom-select,
+.form-select {
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23c8a84a' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center/8px 10px !important;
+    background-color: transparent;
+    color: #d4cbb8;
+    border-color: rgba(200, 168, 74, 0.35);
+    border-radius: 2px;
+}
+
+.card {
+    border-radius: 2px !important;
+    background-color: #12232e;
+    border-color: rgba(200, 168, 74, 0.35);
+}
+
+#score-graph {
+    min-height: 400px;
+    display: block;
+    clear: both;
+}
+
+#solves-graph {
+    display: block;
+    height: 350px;
+}
+
+#categories-pie-graph,
+#keys-pie-graph {
+    min-height: 400px;
+    display: block;
+}

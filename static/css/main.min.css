@@ -1,0 +1,787 @@
+/* ===== Hogwarts Theme for CTFd ===== */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --bg-primary: #0c1a24;
+  --bg-secondary: #12232e;
+  --bg-tertiary: #1a3040;
+  --gold: #c8a84a;
+  --gold-light: #dcc06a;
+  --parchment: #d4cbb8;
+  --crimson: #7a5a28;
+  --crimson-dark: #5a4018;
+  --emerald: #2a6a4a;
+  --emerald-light: #38886a;
+  --silver: #8a9aaa;
+  --sapphire: #2a5060;
+  --sapphire-light: #3a7080;
+  --border-gold: rgba(200, 168, 74, 0.35);
+}
+
+/* --- Particles (JS-driven, randomized) --- */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 220, 0.9) 0%, rgba(200, 168, 74, 0.4) 60%, transparent 100%);
+  pointer-events: none;
+  animation: particleFloat var(--duration) linear var(--delay) infinite;
+  left: var(--x);
+  bottom: -10px;
+  width: var(--size);
+  height: var(--size);
+  opacity: 0;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: var(--peak-opacity);
+  }
+
+  50% {
+    transform: translateY(calc(-50vh)) translateX(var(--drift));
+    opacity: var(--peak-opacity);
+  }
+
+  90% {
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateY(-105vh) translateX(var(--drift-end));
+    opacity: 0;
+  }
+}
+
+/* --- Phoenix (Fawkes) flying animation — challenges page only --- */
+.phoenix-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.phoenix {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(255, 120, 30, 0.6)) drop-shadow(0 0 30px rgba(255, 80, 0, 0.3));
+  animation: phoenixFly 15s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes phoenixFly {
+  0% {
+    left: -150px;
+    top: 70%;
+    transform: rotate(5deg) scaleX(1);
+    opacity: 0;
+  }
+
+  5% {
+    left: 5%;
+    top: 55%;
+    transform: rotate(-5deg) scaleX(1);
+    opacity: 1;
+  }
+
+  15% {
+    left: 20%;
+    top: 35%;
+    transform: rotate(-10deg) scaleX(1);
+    opacity: 1;
+  }
+
+  30% {
+    left: 40%;
+    top: 20%;
+    transform: rotate(0deg) scaleX(1);
+    opacity: 1;
+  }
+
+  50% {
+    left: 55%;
+    top: 30%;
+    transform: rotate(5deg) scaleX(1);
+    opacity: 1;
+  }
+
+  65% {
+    left: 70%;
+    top: 15%;
+    transform: rotate(-8deg) scaleX(1);
+    opacity: 1;
+  }
+
+  80% {
+    left: 85%;
+    top: 25%;
+    transform: rotate(-3deg) scaleX(1);
+    opacity: 0.8;
+  }
+
+  90% {
+    left: 100%;
+    top: 10%;
+    transform: rotate(-10deg) scaleX(1);
+    opacity: 0.3;
+  }
+
+  95% {
+    left: 110%;
+    top: 5%;
+    transform: rotate(-10deg) scaleX(1);
+    opacity: 0;
+  }
+
+  100% {
+    left: 110%;
+    top: 5%;
+    transform: rotate(-10deg) scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* --- Challenge Board Specifics --- */
+.challenge-charts-box {
+  padding: 40px 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+select option {
+  background-color: var(--bg-secondary);
+  font-family: 'Crimson Text', serif;
+}
+
+#score-graph>div>canvas,
+.challenge-charts {
+  background: var(--bg-secondary);
+}
+
+/* Category headers with wand icon */
+.category-header h3::before {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  background: url(../img/wand.png) no-repeat;
+  background-size: contain;
+}
+
+.category-header h3 {
+  text-transform: uppercase;
+  font-family: 'MedievalSharp', cursive;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+/* Submit button */
+.challenge-submit {
+  background: var(--crimson) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 20px rgba(155, 27, 48, 0.5);
+  border: 1px solid var(--gold) !important;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.challenge-submit:hover {
+  background: var(--crimson-dark) !important;
+  box-shadow: 0 2px 30px rgba(155, 27, 48, 0.7);
+}
+
+.challenge-submit:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}
+
+/* Challenge buttons */
+.challenge-button {
+  box-shadow: 3px 3px var(--gold) !important;
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-gold) !important;
+  transition: all 0.3s ease;
+}
+
+.challenge-button:hover {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 3px 3px var(--gold-light), 0 0 15px rgba(212, 168, 67, 0.2) !important;
+}
+
+.challenge-button.challenge-solved,
+.challenge-button.solved-challenge {
+  background-color: var(--emerald) !important;
+  border-color: var(--gold) !important;
+  opacity: 0.9;
+}
+
+.challenge-button.challenge-solved:hover,
+.challenge-button.solved-challenge:hover {
+  background-color: var(--emerald-light) !important;
+  opacity: 1;
+}
+
+/* Snitch icon on challenge point values */
+.challenge-button span::before {
+  background-image: url(../img/snitch.png);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  content: '';
+  background-size: cover;
+  margin: 0 4px -3px 0;
+}
+
+.challenge-value::before {
+  background-image: url(../img/snitch.png);
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  content: '';
+  background-size: cover;
+  margin: 0 -5px -5px 0;
+}
+
+/* Challenge tags */
+.challenge-tag {
+  background-color: var(--sapphire) !important;
+  text-transform: uppercase;
+}
+
+.challenge-name {
+  color: var(--gold);
+  text-shadow: none;
+  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+}
+
+/* Castle background — rendered directly on body, no pseudo-elements */
+/* Layered gradients provide readability while keeping the castle vivid */
+
+/* Highlight.js overrides for dark theme */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: .5em;
+  color: var(--parchment);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--silver);
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.hljs-literal,
+.hljs-number,
+.hljs-tag .hljs-attr,
+.hljs-template-variable,
+.hljs-variable {
+  color: #8ac6d0;
+}
+
+.hljs-doctag,
+.hljs-string {
+  color: #c6956a;
+}
+
+.hljs-section,
+.hljs-selector-id,
+.hljs-title {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #8ac6d0;
+  font-weight: 700;
+}
+
+.hljs-attribute,
+.hljs-name,
+.hljs-tag {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.hljs-link,
+.hljs-regexp {
+  color: var(--emerald-light);
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: var(--sapphire-light);
+}
+
+/* --- Layout --- */
+main {
+  padding-top: 3.5rem;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  margin-bottom: 100px;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  height: 60px;
+  line-height: 20px;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.footer .container {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--silver);
+}
+
+/* ===== Hogwarts Theme Overrides (Bootstrap 5 Dark) ===== */
+
+/* --- Base --- */
+body {
+  /* Layered background: teal gradient overlay + castle image + base */
+  background:
+    linear-gradient(to bottom,
+      rgba(12, 26, 36, 0.5) 0%,
+      rgba(12, 26, 36, 0.2) 25%,
+      transparent 45%,
+      transparent 75%,
+      rgba(12, 26, 36, 0.35) 100%) no-repeat center top / 100% 100%,
+    url(../img/castle_bg.png) no-repeat center center / cover,
+    #0c1a24;
+  background-attachment: fixed, fixed, fixed;
+  color: var(--parchment);
+  font-family: 'Crimson Text', Georgia, serif;
+  min-height: 100vh;
+}
+
+h1,
+h2 {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  color: var(--gold);
+}
+
+h3,
+h4,
+h5,
+h6 {
+  color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+}
+
+/* --- Navbar --- */
+.navbar {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 2px solid var(--gold);
+  box-shadow: 0 2px 20px rgba(212, 168, 67, 0.15);
+}
+
+.nav-link {
+  text-transform: uppercase;
+  color: var(--parchment) !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--gold) !important;
+}
+
+/* --- Layout --- */
+main .container {
+  max-width: 90% !important;
+  margin-top: 60px;
+}
+
+/* --- Tables --- */
+.table {
+  background-color: transparent;
+  color: var(--parchment);
+  border: 1px solid var(--border-gold);
+}
+
+.table th,
+.table td {
+  border-color: var(--border-gold);
+  color: var(--parchment);
+}
+
+.table thead th {
+  text-transform: uppercase;
+  color: var(--gold) !important;
+  border-bottom: 2px solid var(--gold) !important;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  background-color: var(--crimson);
+  border-color: var(--gold);
+  color: #fff;
+  border-radius: 2px;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  background-color: var(--crimson-dark);
+  border-color: var(--gold-light);
+  color: #fff;
+}
+
+.btn-info {
+  background-color: var(--sapphire);
+  border-color: var(--sapphire);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.btn-info:hover {
+  background-color: var(--sapphire-light);
+  border-color: var(--sapphire-light);
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: var(--crimson);
+  border-color: var(--crimson-dark);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.btn-outline-secondary {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--gold);
+  color: var(--bg-primary);
+}
+
+/* --- Badges --- */
+.badge {
+  border-radius: 2px;
+}
+
+.badge-notification {
+  vertical-align: top;
+  margin-left: -0.5em;
+  font-size: 50%;
+}
+
+/* --- Forms --- */
+.form-control {
+  background-color: transparent !important;
+  color: var(--parchment) !important;
+  border-color: var(--border-gold);
+  border-radius: 2px;
+  padding: 0.8em !important;
+  border-style: solid;
+  border-width: 1px;
+  height: auto !important;
+  font-family: 'Crimson Text', serif;
+}
+
+.form-control::placeholder {
+  color: var(--silver);
+}
+
+.form-control:focus {
+  background-color: transparent !important;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.1rem var(--gold), 0 0 15px rgba(212, 168, 67, 0.15);
+  color: var(--parchment) !important;
+}
+
+.form-select {
+  background-color: transparent;
+  color: var(--parchment);
+  border-color: var(--border-gold);
+  font-family: 'Crimson Text', serif;
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+/* --- Cards --- */
+.card {
+  border-radius: 2px !important;
+  background-color: var(--bg-secondary);
+  border-color: var(--border-gold);
+}
+
+/* --- Modals --- */
+.modal-content {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 30px rgba(212, 168, 67, 0.15);
+  border-radius: 2px !important;
+}
+
+.modal-header {
+  border-bottom-color: var(--border-gold);
+}
+
+.modal-footer {
+  border-top-color: var(--border-gold);
+}
+
+/* --- Dropdowns --- */
+.dropdown-menu {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+}
+
+.dropdown-item {
+  color: var(--parchment);
+  font-family: 'Crimson Text', serif;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--bg-tertiary);
+  color: var(--gold);
+}
+
+/* --- Tabs --- */
+.nav-tabs .nav-link {
+  color: var(--silver);
+  font-family: 'Cinzel', serif;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--bg-secondary);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.nav-pills .nav-link {
+  color: var(--parchment);
+  font-family: 'Cinzel', serif;
+  border-radius: 2px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--crimson);
+  color: #fff;
+}
+
+/* --- Links --- */
+a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gold-light);
+}
+
+a.text-secondary {
+  color: var(--silver) !important;
+}
+
+.text-muted {
+  color: var(--silver) !important;
+}
+
+/* --- Jumbotron --- */
+.jumbotron {
+  background-color: transparent;
+  color: var(--parchment);
+}
+
+/* --- Page Content (index, custom pages) --- */
+main>.container:only-child {
+  text-align: center;
+}
+
+main>.container h1,
+main>.container h2,
+main>.container h3,
+.jumbotron h1 {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.5;
+}
+
+main>.container:only-child h4,
+main>.container:only-child h5,
+main>.container:only-child h6 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+main>.container:only-child p {
+  font-size: 1.1rem;
+  color: var(--parchment);
+  line-height: 1.9;
+  font-family: 'Crimson Text', serif;
+}
+
+main>.container:only-child .fab,
+main>.container:only-child .fa,
+main>.container:only-child .fas,
+main>.container:only-child .far {
+  color: var(--gold-light);
+}
+
+main>.container:only-child a:not(.btn) {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9em;
+}
+
+main>.container:only-child a:not(.btn):hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+/* --- Alerts --- */
+.alert {
+  border-radius: 2px !important;
+}
+
+.alert-success {
+  background-color: rgba(26, 107, 60, 0.3);
+  border-color: var(--emerald);
+  color: var(--parchment);
+}
+
+.alert-danger {
+  background-color: rgba(155, 27, 48, 0.3);
+  border-color: var(--crimson);
+  color: var(--parchment);
+}
+
+.alert-info {
+  background-color: rgba(42, 74, 138, 0.3);
+  border-color: var(--sapphire);
+  color: var(--parchment);
+}
+
+.alert-warning {
+  background-color: rgba(212, 168, 67, 0.2);
+  border-color: var(--gold);
+  color: var(--parchment);
+}
+
+/* --- Graphs --- */
+#score-graph {
+  min-height: 400px;
+  display: block;
+  clear: both;
+}
+
+#solves-graph {
+  display: block;
+  height: 350px;
+}
+
+#categories-pie-graph,
+#keys-pie-graph {
+  min-height: 400px;
+  display: block;
+}
+
+/* --- Select options --- */
+select.form-control {
+  height: auto !important;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--gold);
+  color: var(--bg-primary);
+}
+
+/* --- Badge classes (custom) --- */
+.pbadge {
+  font-family: 'Cinzel', serif;
+}
+
+.pbadge-primary {
+  color: var(--gold);
+}
+
+.pbadge-secondary {
+  color: var(--crimson);
+}

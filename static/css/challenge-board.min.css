@@ -1,0 +1,45 @@
+/* Hogwarts Theme - Challenge Board */
+.chal-desc {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 14px;
+    font-family: 'Crimson Text', serif;
+    color: #d4cbb8;
+}
+
+.chal-desc img {
+    max-width: 100%;
+    height: auto;
+}
+
+.modal-content {
+    border-radius: 2px;
+    max-width: 1000px;
+    padding: 1em;
+    margin: 0 auto;
+    background-color: #12232e;
+    border: 1px solid #c8a84a;
+    box-shadow: 0 0 30px rgba(200, 168, 74, 0.15);
+}
+
+.challenge-button {
+    box-shadow: 3px 3px rgba(200, 168, 74, 0.5) !important;
+}
+
+.solved-challenge,
+.challenge-solved {
+    background-color: #2a6a4a !important;
+    opacity: 0.9;
+    border: 1px solid #c8a84a !important;
+}
+
+.corner-button-check {
+    margin-top: -10px;
+    margin-right: 25px;
+    position: absolute;
+    right: 0;
+}
+
+.key-submit .btn {
+    height: 51px;
+}

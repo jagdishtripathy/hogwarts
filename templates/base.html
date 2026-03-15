@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+
+<head>
+  <title>{{ title or Configs.ctf_name }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ Configs.ctf_small_icon }}" type="image/x-icon">
+  {{ meta | safe }}
+
+  {% block stylesheets %}
+  {{ Assets.css("assets/scss/main.scss") }}
+  {% endblock %}
+
+  <link rel="stylesheet" href="{{ url_for('views.themes', path='css/fonts.min.css') }}">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=MedievalSharp&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('views.themes', path='css/core.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('views.themes', path='css/main.min.css') }}">
+
+  {{ Plugins.styles }}
+
+  {{ Assets.js("assets/js/color_mode_switcher.js", type=None) }}
+
+  <script type="text/javascript">
+    // Force dark mode for hogwarts theme - override color_mode_switcher
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  </script>
+
+  <script type="text/javascript">
+    window.init = {
+      'urlRoot': "{{ request.script_root }}",
+      'csrfNonce': "{{ Session.nonce }}",
+      'userMode': "{{ Configs.user_mode }}",
+      'userId': {{ Session.id }},
+    'userName': { { User.name | tojson } },
+    'userEmail': { { User.email | tojson } },
+    'userVerified': { { User.verified | tojson } },
+    'teamId': { { Team.id | tojson } },
+    'teamName': { { Team.name | tojson } },
+    'start': { { Configs.start | tojson } },
+    'end': { { Configs.end | tojson } },
+    'themeSettings': { { Configs.theme_settings | tojson } },
+    'eventSounds': [
+      "/themes/core/static/sounds/notification.webm",
+      "/themes/core/static/sounds/notification.mp3",
+    ],
+      }
+  </script>
+
+  {{ Configs.theme_header }}
+</head>
+
+<body>
+  <div class="particles"></div>
+  {% include "components/navbar.html" %}
+
+  <main role="main">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  {% include "components/snackbar.html" %}
+
+  <footer class="footer">
+    <div class="container text-center">
+      <div><a href="https://github.com/jagdishtripathy" class="text-secondary"><small class="text-muted">Hogwarts Theme
+            by Jagdish Tripathy</small></a></div>
+      <a href="https://ctfd.io" class="text-secondary">
+        <small class="text-muted">
+          {% trans %}Powered by CTFd{% endtrans %}
+        </small>
+      </a>
+    </div>
+  </footer>
+
+  {% include "components/notifications.html" %}
+
+  {% block scripts %}
+  {{ Assets.js("assets/js/page.js") }}
+  {% endblock %}
+
+  {{ Plugins.scripts }}
+
+  {{ Configs.theme_footer }}
+
+  <script>
+    // Hogwarts particle spawner — creates natural, randomized firefly-like particles
+    (function () {
+      var c = document.querySelector('.particles');
+      if (!c) return;
+      for (var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        var size = (3 + Math.random() * 4) + 'px';
+        var dur = (4 + Math.random() * 6) + 's';
+        var del = (Math.random() * 8) + 's';
+        var x = (Math.random() * 100) + '%';
+        var drift = ((Math.random() - 0.5) * 160) + 'px';
+        var driftEnd = ((Math.random() - 0.5) * 200) + 'px';
+        var peak = (0.5 + Math.random() * 0.5);
+        p.style.setProperty('--size', size);
+        p.style.setProperty('--duration', dur);
+        p.style.setProperty('--delay', del);
+        p.style.setProperty('--x', x);
+        p.style.setProperty('--drift', drift);
+        p.style.setProperty('--drift-end', driftEnd);
+        p.style.setProperty('--peak-opacity', peak);
+        c.appendChild(p);
+      }
+    })();
+  </script>
+</body>
+
+</html>
