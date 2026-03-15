@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Fawkes the Phoenix -->
-<div class="phoenix-container">
-  <img src="{{ url_for('views.themes', path='img/phoenix.png') }}" class="phoenix" alt="Fawkes">
-</div>
-
 <div class="jumbotron">
   <div class="container">
     <h1>
@@ -21,10 +16,15 @@
     </div>
   </div>
 
-  <div x-data="ChallengeBoard" @load-challenges.window="loadChallenges()"
-    @load-challenge.window="loadChallenge($event.detail)">
-    <div x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
-      x-html="$store.challenge.data.view"></div>
+  <div 
+    x-data="ChallengeBoard" 
+    @load-challenges.window="loadChallenges()" 
+    @load-challenge.window="loadChallenge($event.detail)"
+  >
+    <div
+        x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
+        x-html="$store.challenge.data.view"
+    ></div>
 
     <div x-show="!loaded">
       <div class="min-vh-50 d-flex align-items-center">
@@ -45,10 +45,14 @@
             <div class="challenges-row row">
               <template x-for="(c, idx) in getChallenges(category)" :key="c.id">
                 <div class="col-sm-6 col-md-4 col-lg-3 my-3">
-                  <button class="challenge-button btn btn-dark w-100 h-100" :class="[
-                          c.solved_by_me ? 'challenge-solved' : '',
-                          ...c.tags.map((tag) => `tag-${tag.value.replace(/ /g, '-')}`),
-                        ];" :value="c.id" @click="loadChallenge(c.id)">
+                  <button
+                      class="challenge-button btn btn-dark w-100 h-100"
+                      :class="[
+                        c.solved_by_me ? 'challenge-solved' : '',
+                        ...c.tags.map((tag) => `tag-${tag.value.replace(/ /g, '-')}`),
+                      ];"
+                      :value="c.id" @click="loadChallenge(c.id)"
+                  >
 
                     <div class="challenge-inner my-3">
                       <p x-text="c.name"></p>
@@ -67,5 +71,5 @@
 {% endblock %}
 
 {% block scripts %}
-{{ Assets.js("assets/js/challenges.js") }}
+  {{ Assets.js("assets/js/challenges.js") }}
 {% endblock %}
