@@ -12,7 +12,7 @@
 </p>
 
 ---
-![hogwarts](https://i.allthepics.net/2026/03/15/hogwarts.gif)
+![hogwats](https://i.allthepics.net/2026/03/15/hogwats.gif)
 ---
 
 ## ✨ Features
