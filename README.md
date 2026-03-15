@@ -12,6 +12,8 @@
 </p>
 
 ---
+![hogwarts](https://i.allthepics.net/2026/03/15/hogwarts.gif)
+---
 
 ## ✨ Features
 
